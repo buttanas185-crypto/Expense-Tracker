@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --cancel-color: #475569;
+  --cancel-hover: #334155;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --success: #10b981;
+  --error: #ef4444;
+  --edit-color: #f59e0b;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  width: 100%;
+}
+
+header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(to right, #a5b4fc, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  padding: 0 20px;
+}
+
+h1#balance {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 35px 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+  margin-left: 15px;
+}
+
+h4 {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.inc-exp-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.inc-exp-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+.inc-exp-container > div:first-of-type {
+  border-right: 1px solid var(--border-color);
+}
+
+.money {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.money.plus {
+  color: var(--success);
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.money.minus {
+  color: var(--error);
+  text-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+.list {
+  list-style-type: none;
+}
+
+.list li {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 14px 16px;
+  margin: 12px 0;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.list li:hover {
+  transform: translateX(4px);
+  background: rgba(45, 55, 72, 0.8);
+}
+
+.list li.plus {
+  border-left: 4px solid var(--success);
+}
+
+.list li.minus {
+  border-left: 4px solid var(--error);
+}
+
+/* Action Container panel hidden to right */
+.action-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.list li:hover .action-panel {
+  transform: translateX(0);
+}
+
+.action-btn {
+  cursor: pointer;
+  border: 0;
+  color: white;
+  font-size: 14px;
+  height: 100%;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.2s;
+}
+
+.action-btn:hover {
+  filter: brightness(1.15);
+}
+
+.action-btn.edit {
+  background-color: var(--edit-color);
+}
+
+.action-btn.delete {
+  background-color: var(--error);
+}
+
+.form-control {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.helper-text {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  display: block;
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  width: 100%;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.btn {
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 20px;
+  padding: 14px;
+  width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  transition:
+    background-color 0.2s,
+    transform 0.1s,
+    box-shadow 0.2s;
+}
+
+.btn:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.cancel-btn {
+  background: var(--cancel-color);
+  box-shadow: none;
+  margin-top: 10px;
+}
+
+.btn.cancel-btn:hover {
+  background: var(--cancel-hover);
+}
