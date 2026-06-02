@@ -39,6 +39,20 @@ function saveTransaction(e) {
     return;
   }
 
+  const transactionText = text.value.trim();
+  const lowerCaseText = transactionText.toLowerCase();
+  
+  // Get the absolute numerical value so the user's manual plus/minus sign doesn't break the logic
+  let enteredAmount = Math.abs(+amount.value);
+
+  // --- INCOME OR EXPENSE CHECK ---
+  // If text includes 'salary' or 'pocket money', make it positive. Otherwise, turn it negative.
+  if (lowerCaseText.includes("salary") || lowerCaseText.includes("pocket money")) {
+    enteredAmount = enteredAmount; // Stays positive (Income)
+  } else {
+    enteredAmount = -enteredAmount; // Becomes negative (Expense/Deduction)
+  }
+
   const currentEditingId = editingIdInput.value;
 
   if (currentEditingId !== "") {
@@ -46,8 +60,8 @@ function saveTransaction(e) {
       if (t.id === parseInt(currentEditingId)) {
         return {
           ...t,
-          text: text.value.trim(),
-          amount: +amount.value,
+          text: transactionText,
+          amount: enteredAmount,
           date: formatDate(dateInput.value),
         };
       }
@@ -57,8 +71,8 @@ function saveTransaction(e) {
   } else {
     const transaction = {
       id: generateId(),
-      text: text.value.trim(),
-      amount: +amount.value,
+      text: transactionText,
+      amount: enteredAmount,
       date: formatDate(dateInput.value),
     };
     transactions.push(transaction);
@@ -133,7 +147,9 @@ function startEditTransaction(id) {
   editingIdInput.value = id;
 
   text.value = target.text;
-  amount.value = target.amount;
+  
+  // Show the absolute value in the input field when editing so it is cleaner to read
+  amount.value = Math.abs(target.amount);
   dateInput.value = parseDateToISO(target.date);
 
   text.focus();
